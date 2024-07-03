@@ -15,36 +15,9 @@ class VRButton {
 
         if ('xr' in navigator) {
 
-            const container = document.createElement('div');
-            container.style.position = 'absolute';
-            container.style.width = '100%';
-            container.style.height = '100vh';
-            container.style.display = 'flex';
-            container.style.flexDirection = 'column';
-            container.style.alignItems = 'center';
-            container.style.justifyContent = 'center';
-
-            const welcomeText = document.createElement('div');
-            welcomeText.textContent = 'WELCOME TO XR COLLEGE';
-            welcomeText.style.fontSize = '48px';
-            welcomeText.style.color = 'white';
-            welcomeText.style.marginBottom = '20px'; // Add some space between the text and the button
-
             const button = document.createElement('button');
             button.style.display = 'none';
-            button.style.width = '120px';
-            button.style.height = '120px';
-            button.style.cursor = 'pointer';
-            button.style.fontSize = '20px'; // Adjust font size if needed
-            button.style.background = 'orange'; // Change background color to orange
-            button.style.border = 'none';
-            button.style.borderRadius = '10px';
-            button.innerHTML = '<i class="fas fa-vr-cardboard"></i>';
-            button.style.animation = 'bounce 2s infinite'; // Apply the 'bounce' animation with a duration of 2s and infinite looping
-
-            container.appendChild(welcomeText);
-            container.appendChild(button);
-            document.body.appendChild(container);
+            button.style.height = '40px';
 
             navigator.xr.isSessionSupported(this.sessionMode).then((supported) => {
 
@@ -52,6 +25,8 @@ class VRButton {
                 if (options && options.vrStatus) options.vrStatus(supported);
 
             });
+
+            document.body.appendChild(button);
 
         } else {
 
@@ -122,8 +97,13 @@ class VRButton {
 
         //
 
-        button.style.display = 'block'; // Ensure the button is visible
-        button.style.position = 'relative';
+        button.style.display = '';
+        button.style.position = 'absolute'; // Position absolute to control position
+        button.style.left = '50%'; // Center horizontally
+        button.style.top = '50%'; // Center vertically
+        button.style.transform = 'translate(-50%, -50%)'; // Center the button precisely
+        button.style.width = '120px'; // Increase width of the button
+        button.style.height = '120px'; // Increase height of the button
         button.style.cursor = 'pointer';
         button.innerHTML = '<i class="fas fa-vr-cardboard"></i>';
         button.style.animation = 'bounce 2s infinite'; // Apply the 'bounce' animation with a duration of 2s and infinite looping
@@ -131,11 +111,13 @@ class VRButton {
 
         button.onmouseenter = function () {
             button.textContent = 'ENTER VR';
+            button.style.fontSize = '10px'; // Reduce text size
             button.style.background = 'darkorange'; // Change background color on hover
         };
 
         button.onmouseleave = function () {
             button.innerHTML = '<i class="fas fa-vr-cardboard"></i>';
+            button.style.fontSize = ''; // Reset font size
             button.style.background = 'orange'; // Reset background color
         };
 
@@ -164,10 +146,10 @@ class VRButton {
         const keyframes = `
             @keyframes bounce {
                 0%, 100% {
-                    transform: translateY(0);
+                    transform: translate(-50%, -50%) scale(1);
                 }
                 50% {
-                    transform: translateY(-10px);
+                    transform: translate(-50%, -50%) scale(1.1);
                 }
             }
         `;
