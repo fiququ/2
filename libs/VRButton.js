@@ -111,11 +111,13 @@ class VRButton {
 
         button.onmouseenter = function () {
             button.textContent = 'ENTER VR';
+            button.style.fontSize = '10px'; // Reduce text size
             button.style.background = 'darkorange'; // Change background color on hover
         };
 
         button.onmouseleave = function () {
             button.innerHTML = '<i class="fas fa-vr-cardboard"></i>';
+            button.style.fontSize = ''; // Reset font size
             button.style.background = 'orange'; // Reset background color
         };
 
